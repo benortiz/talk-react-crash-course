@@ -57,20 +57,16 @@ Insert example
 
 ---
 
-## React
+# React
+## Cohesion
 
-1. Increase cohesion between related HTML/CSS/JS.
-1. One-way flow of data.
-
----
-
-## React
-### Cohesion
+Increase cohesion between related HTML and JS.
 
 ```javascript
-function TodoItem(props) {
+// Button.js
+function Button(props) {
   return (
-    <li onClick={handleOnClick}>{props.itemName}</li>
+    <button onClick={handleOnClick}>{props.callToAction}</button>
   )
 }
 
@@ -80,87 +76,49 @@ function handleOnClick() {
 ```
 
 ^ JSX is how we get HTML in our JS
-^ We'll get back to CSS shortly
 
 ---
 
-## React
-### Data Flow
+# React
+## Data Flow
 
-`props` are the arguments passed to every component from the component above it.
-
-There is no way to pass information upwards.
-
----
-
-## React
-### Data Flow
-
-A component can also have internal state. This is useful for keeping UI or
-tranitory state that is only useful to one specific component.
-
----
-
-## React
-### Data Flow
+1. All data flows downwards.
+1. `props` are the arguments passed to a component from the component above it.
+1. There is no<sup>*</sup> way to pass information upwards.
 
 ```javascript
-class TodoItem extends Component {
-  state = {
-    active: false,
-  }
-  
-  handleMouseOver() {
-    this.setState({
-      active: true,
-    });
-  }
-
-  render() {
-    <li 
-      className="{this.state.active ? 'active' : 'inactive'}"
-      onMouseOver={handleMouseOver}>
-      {this.props.itemName}
-    </li>
-  }
-}
-```
-
----
-## React
-### Cohesion
-
-Back to CSS
-
-```javascript
-import styles from "./Item.styles";
-
-function Item(props) {
-  return (
-    <li className={styles.item}>{props.itemName}</li>
+function MyForm(props) {
+  return(
+    // ...
+    <Button callToAction="Click here!" />
   )
 }
 ```
 
 ---
 
-## React
-### Cohesion
+# React
+## Cohesion
 
-Container/Presentational Components
+If we can increase cohesion between related HTML and JS, why not CSS?
+
+---
+
+# React
+## Cohesion
+
+```javascript
+import btn from "./Button.styles";
+
+function Button(props) {
+  return (
+    <button className={btn.primary}>{props.callToAction}</button>
+  )
+}
+```
 
 ---
 
-## Putting it all together
-
-```
-src/
-|__ Todo/
-    |__ Item/
-    |   |__ Item.js
-    |   |__ Item.styles.css
-    |__ List/
-    |__ Todo.js
-```
 
 ---
+
