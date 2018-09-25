@@ -2,10 +2,54 @@
 
 ---
 
-## Guideposts
+1. Thinking in React
+1. React
+1. State Management
+1. Async Actions
 
-1. Increase cohesion, decrease coupling.
-1. Make it easy to turn into a drop-in npm package.
+---
+
+# Thinking in React
+1. **Cohesion**: Increase cohesion, decrease coupling.
+1. **Data Flow**: All data flows in one direction.
+
+---
+
+# Thinking in React
+## Cohesion
+
+- Features first, types second.
+- Easy to package.
+
+---
+
+# Thinking in React
+## Cohesion
+
+```
+src/
+|__ Form/
+    |__ Input/
+    |   |__ Input.js
+    |   |__ Input.styles.css
+    |__ Button/
+    |__ Form.js
+```
+
+---
+
+# Thinking in React
+## Data Flow
+
+- Some point
+- Another point
+
+---
+
+# Thinking in React
+## Data Flow
+
+Insert example
 
 ---
 
