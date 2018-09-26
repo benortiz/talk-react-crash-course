@@ -119,6 +119,110 @@ function Button(props) {
 
 ---
 
+# State Management
+
+---
+
+# State Management
+## Data Flow
+
+![inline](https://cdn-images-1.medium.com/max/1600/1*EdiFUfbTNmk_IxFDNqokqg.png)
+
+1. View (React)
+1. Dispatch an Action
+1. Reducers manipulate the state in Store
+1. Re-render -> View
+
+^ say something
+
+---
+
+# State Management
+## Data Flow
+
+```javascript
+import { inputReducer } from 'components/Form/Input'
+
+const store = createStore({
+  input: inputReducer,  
+})
+```
+
+---
+
+# State Management
+## Data Flow
+
+```javascript
+// Input.actions.js
+const INPUT_CHANGE = 'INPUT_CHANGE';
+
+export function handleChange() {
+  return {
+    type: INPUT_CHANGE,
+    // more information
+  }
+}
+```
+
+---
+
+# State Management
+## Data Flow
+
+```javascript
+// Input.js
+import { handleChange } from './actions';
+
+function Input(props) {
+  return (
+    <input onChange={handleOnChange}></input>
+  )
+}
+
+function mapDispatchToProps(dispatch) {
+  return({
+    hadleOnChange: () => {
+      dispatch(handleChange);
+    }
+  })
+}
+
+export default connect(mapStateToProps)(Input)
+```
+---
+
+# State Management
+## Data Flow
+
+![inline](https://cdn-images-1.medium.com/max/1600/1*EdiFUfbTNmk_IxFDNqokqg.png)
+
+1. View (React)
+1. Dispatch an Action
+1. Reducers manipulate the state in Store
+1. Re-render -> View
+
+^ say something
+
+---
+
+# State Management
+## Cohesion
+
+```
+src/
+|__ components/
+|   |__ Form/
+|       |__ Input/
+|       |__ Form.js
+|       |__ Form.actions.js
+|       |__ Form.reducers.js
+|__ store.js
+|__ index.js
+```
+
+^ We put everything together that is related to a feature.
+^ Note the global store.
 
 ---
 
