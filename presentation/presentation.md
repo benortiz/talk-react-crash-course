@@ -80,6 +80,24 @@ function handleOnClick() {
 ---
 
 # React
+## Cohesion
+
+```javascript
+import btn from "./Button.styles";
+
+function Button(props) {
+  return (
+    <button className={btn.primary}>{props.callToAction}</button>
+  )
+}
+```
+
+^ CSS Modules help make sure that primary is unique no matter where you put this component.
+^ POST CSS has a feature to automatically reset between components so that you never have to worry about inheritance.
+
+---
+
+# React
 ## Data Flow
 
 1. All data flows downwards.
@@ -95,27 +113,7 @@ function MyForm(props) {
 }
 ```
 
----
-
-# React
-## Cohesion
-
-If we can increase cohesion between related HTML and JS, why not CSS?
-
----
-
-# React
-## Cohesion
-
-```javascript
-import btn from "./Button.styles";
-
-function Button(props) {
-  return (
-    <button className={btn.primary}>{props.callToAction}</button>
-  )
-}
-```
+^ Introduce the idea of the component tree
 
 ---
 
@@ -133,7 +131,7 @@ function Button(props) {
 1. Reducers manipulate the state in Store
 1. Re-render -> View
 
-^ say something
+^ Talk about how we don't mutate and performance
 
 ---
 
@@ -182,7 +180,7 @@ function Input(props) {
 
 function mapDispatchToProps(dispatch) {
   return({
-    hadleOnChange: () => {
+    handleOnChange: () => {
       dispatch(handleChange);
     }
   })
@@ -190,20 +188,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps)(Input)
 ```
-
----
-
-# State Management
-## Data Flow
-
-![inline](https://cdn-images-1.medium.com/max/1600/1*EdiFUfbTNmk_IxFDNqokqg.png)
-
-1. View (React)
-1. Dispatch an Action
-1. Reducers manipulate the state in Store
-1. Re-render -> View
-
-^ say something
 
 ---
 
@@ -293,3 +277,23 @@ src/
 |__ store.js
 |__ index.js
 ```
+
+---
+
+# Async Actions
+
+^ sagas and remote, doing fetch, success/fail
+
+---
+
+# Async Actions
+## Data Flow
+
+---
+
+# Next Steps
+
+- GraphQL & Apolo
+
+^ Components can declare what data they want. GraphQL will handle the fetching. Apolo will make sure it only fetches data that we don't alreay have locally.
+^ Apolo query batching
