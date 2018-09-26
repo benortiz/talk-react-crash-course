@@ -190,6 +190,7 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps)(Input)
 ```
+
 ---
 
 # State Management
@@ -226,3 +227,69 @@ src/
 
 ---
 
+# State Management
+## Cohesion
+
+Q: How do components talk to each other?
+A: Actions!
+
+---
+
+# State Management
+## Cohesion
+
+```javascript
+// Input.js
+import { handleChange } from '../components/OtherComponent';
+
+function Input(props) {
+  // ...
+}
+
+function mapDispatchToProps(dispatch) {
+  return({
+    hadleOnChange: () => {
+      dispatch(handleChange);
+    }
+  })
+}
+```
+
+---
+
+# State Management
+## Cohesion
+
+Sagas to the rescue!
+
+```javascript
+// formAndOtherComponentSagas.js
+
+function* someSagaName() {
+  while (true) {
+    const payload = yield take('SOME_FORM_ACTION')
+    put({
+      type: 'SOME_OTHER_COMPONENT_ACTION',
+      data: payload.data,
+    })
+  }
+}
+```
+
+---
+
+# State Management
+## Cohesion
+
+```
+src/
+|__ sagas/
+|__ components/
+|   |__ Form/
+|       |__ Input/
+|       |__ Form.js
+|       |__ Form.actions.js
+|       |__ Form.reducers.js
+|__ store.js
+|__ index.js
+```
