@@ -377,3 +377,11 @@ export default ExampleContainer;
 ^ Components can declare what data they want. GraphQL will handle the fetching. Apollo will make sure it only fetches data that we don't alreay have locally.
 ^ Apollo query batching
 ^ https://blog.apollographql.com/reducing-our-redux-code-with-react-apollo-5091b9de9c2a
+
+---
+
+# Try it Yourself
+
+1. Clone the repo (github.com/benortiz/talk-react-crash-course).
+1. Create a `<HelloWorld />` component.
+1. Use JSON Placeholder to create your own async component.
