@@ -32,8 +32,10 @@ src/
     |__ Input/
     |   |__ Input.js
     |   |__ Input.styles.css
+    |   |__ index.js
     |__ Button/
     |__ Form.js
+    |__ index.js
 ```
 
 ---
@@ -146,6 +148,28 @@ const store = createStore({
 })
 ```
 
+^ The store is just a plain JavaScript object with special functions as values
+^ Also: remember index.js? that's how we define a public API for our components.
+
+---
+
+# State Management
+## Data Flow
+
+```javascript
+export function inputReducer(state, action) {
+  switch (action.type) {
+    case INPUT_CHANGE:
+      return {
+        value: action.value,
+        ...state,
+      }
+    default:
+      return state;
+  }
+}
+```
+
 ---
 
 # State Management
@@ -155,10 +179,10 @@ const store = createStore({
 // Input.actions.js
 const INPUT_CHANGE = 'INPUT_CHANGE';
 
-export function handleChange() {
+export function handleChange(event) {
   return {
     type: INPUT_CHANGE,
-    // more information
+    value: event.target.value,
   }
 }
 ```
@@ -174,14 +198,14 @@ import { handleChange } from './actions';
 
 function Input(props) {
   return (
-    <input onChange={handleOnChange}></input>
+    <input onChange={(event) => handleOnChange(event)}></input>
   )
 }
 
 function mapDispatchToProps(dispatch) {
   return({
-    handleOnChange: () => {
-      dispatch(handleChange);
+    handleOnChange: (event) => {
+      dispatch(handleChange(event));
     }
   })
 }
@@ -202,6 +226,7 @@ src/
 |       |__ Form.js
 |       |__ Form.actions.js
 |       |__ Form.reducers.js
+|       |__ index.js
 |__ store.js
 |__ index.js
 ```
@@ -232,8 +257,8 @@ function Input(props) {
 
 function mapDispatchToProps(dispatch) {
   return({
-    hadleOnChange: () => {
-      dispatch(handleChange);
+    hadleOnChange: (event) => {
+      dispatch(handleChange(event));
     }
   })
 }
@@ -251,7 +276,7 @@ Sagas to the rescue!
 
 function* someSagaName() {
   while (true) {
-    const payload = yield take('SOME_FORM_ACTION')
+    const payload = yield take('INPUT_CHANGE')
     put({
       type: 'SOME_OTHER_COMPONENT_ACTION',
       data: payload.data,
@@ -274,6 +299,7 @@ src/
 |       |__ Form.js
 |       |__ Form.actions.js
 |       |__ Form.reducers.js
+|       |__ index.js
 |__ store.js
 |__ index.js
 ```
