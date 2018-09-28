@@ -311,6 +311,24 @@ src/
 ---
 
 # Next Steps
+## Composition
+
+```javascript
+function Table(props) {
+  return <table></table>;
+}
+
+function MyUniqueTable(props) {
+  // do some things with props
+  return <Table someProp={specialValue} ...props />;
+}
+```
+
+^ https://reactjs.org/docs/composition-vs-inheritance.html
+
+---
+
+# Next Steps
 ## Async Actions
 
 ```javascript
