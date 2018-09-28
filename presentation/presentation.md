@@ -43,15 +43,17 @@ src/
 # Thinking in React
 ## Data Flow
 
-- Some point
-- Another point
+- All data flows downwards.
+- There is no<sup>*</sup> way to pass information upwards.
 
 ---
 
 # Thinking in React
 ## Data Flow
 
-Insert example
+![inline](./component-tree.png)
+
+### Component Tree
 
 ---
 
@@ -102,9 +104,7 @@ function Button(props) {
 # React
 ## Data Flow
 
-1. All data flows downwards.
-1. `props` are the arguments passed to a component from the component above it.
-1. There is no<sup>*</sup> way to pass information upwards.
+`props` are the arguments passed to a component from the component above it.
 
 ```javascript
 function MyForm(props) {
