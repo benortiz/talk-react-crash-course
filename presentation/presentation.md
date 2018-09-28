@@ -9,6 +9,7 @@
 1. Try it Yourself
 
 ^ We are going to be moving quickly, but feel free to stop me at anytime with questions you may have.
+^ My goal with this talk is to give you a framework to help you make decisions in the React ecosystem. That's from the tiniest individual component scale up to a full application and deciding which libraries to use.
 
 ---
 
@@ -26,8 +27,10 @@
 
 - Features first, types second.
 - Easy to package.
+- Creating a minimal API surface area.
 
-^ Two ways that cohesion can present itself is the above.
+^ Three ways that cohesion can present itself is the above.
+^ We won't be going into great detail into the last two.
 
 ---
 
@@ -121,6 +124,20 @@ function Button(props) {
 ^ We can take it a step further and increase the cohesion between related CSS too.
 ^ CSS Modules help make sure that primary is unique no matter where you put this component.
 ^ POST CSS has a feature to automatically reset between components so that you never have to worry about inheritance.
+
+---
+
+# React
+## Cohesion
+
+```javascript
+// index.js
+import { Input } from './Input';
+
+export Input;
+```
+
+^ This is a small example of an index file. This is where we define our Form components API. We may or may not want components outside of this component to access internal components.
 
 ---
 
@@ -428,11 +445,12 @@ export default ExampleContainer;
 ^ Components can declare what data they want. GraphQL will handle the fetching. Apollo will make sure it only fetches data that we don't alreay have locally.
 ^ Apollo query batching
 ^ https://blog.apollographql.com/reducing-our-redux-code-with-react-apollo-5091b9de9c2a
+^ So I bring this up at the end, but another major decision factor, which is not unique to React development, is to do the least amount possible. You'll notice in all of our previous examples we only used functions to define components.  Most of the time that's all you need. So even though this is REALLY cool, I want to make a final plug at the end here to try to always do things in the lightest weight possible.
 
 ---
 
 # Try it Yourself
 
 1. Clone the repo (github.com/benortiz/talk-react-crash-course).
-1. Create a `<HelloWorld />` component.
-1. Use JSON Placeholder to create your own async component.
+1. Create a lorem ipsum essay.
+1. Query and display data from JSONPlaceholder.
