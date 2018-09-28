@@ -8,11 +8,16 @@
 1. Next Steps
 1. Try it Yourself
 
+^ We are going to be moving quickly, but feel free to stop me at anytime with questions you may have.
+
 ---
 
 # Thinking in React
 1. **Cohesion**: Increase cohesion, decrease coupling.
 1. **Data Flow**: All data flows in one direction.
+
+^ These are going to be the two themes that we come back to at every point in this presentation, and in developing.
+^ React can mean the UI library, or the whole ecosystem of libraries that create a loose framework.
 
 ---
 
@@ -21,6 +26,8 @@
 
 - Features first, types second.
 - Easy to package.
+
+^ Two ways that cohesion can present itself is the above.
 
 ---
 
@@ -39,6 +46,10 @@ src/
     |__ index.js
 ```
 
+^ This is organized by feature, everything that belongs to a feature is all in one place, the Form/ folder.
+^ This is easy to package, you could just zip up the Form/ folder and take it with you to another repo.
+^ Note the index.js file, we will come back to it later.
+
 ---
 
 # Thinking in React
@@ -46,6 +57,9 @@ src/
 
 - All data flows downwards.
 - There is no<sup>*</sup> way to pass information upwards.
+
+^ There's no asterisk. 
+^ This is how we think of data flow in a React enviornment
 
 ---
 
@@ -56,16 +70,20 @@ src/
 
 ### Component Tree
 
+^ These are components, they only get data from the components above them. If you wanted to get new data into a component, you'd need to pass it in from above.
+^ This might sound really slow, but it's actually incredibly fast because we only re-render what has updates.
+^ Talk about how we don't mutate and performance
+
 ---
 
 # React
+
+^ Now that we've talked about all the theory, let's see some examples.
 
 ---
 
 # React
 ## Cohesion
-
-Increase cohesion between related HTML and JS.
 
 ```javascript
 // Button.js
@@ -80,6 +98,9 @@ function handleOnClick() {
 }
 ```
 
+### Increase cohesion between related HTML and JS.
+
+^ This is the idea that lead to the creation of React. Putting the HTML and JS in different files is actually a false decoupling. These two things are actually deeply linked, so we want to increase cohesion.
 ^ JSX is how we get HTML in our JS
 
 ---
@@ -97,6 +118,7 @@ function Button(props) {
 }
 ```
 
+^ We can take it a step further and increase the cohesion between related CSS too.
 ^ CSS Modules help make sure that primary is unique no matter where you put this component.
 ^ POST CSS has a feature to automatically reset between components so that you never have to worry about inheritance.
 
@@ -105,7 +127,6 @@ function Button(props) {
 # React
 ## Data Flow
 
-`props` are the arguments passed to a component from the component above it.
 
 ```javascript
 function MyForm(props) {
@@ -116,7 +137,9 @@ function MyForm(props) {
 }
 ```
 
-^ Introduce the idea of the component tree
+### `props` are the arguments passed to a component from the component above it.
+
+^ Relate this back to the component tree. Props are how we pass data between components.
 
 ---
 
@@ -129,11 +152,9 @@ function MyForm(props) {
 
 ![inline](./redux-data-flow.png)
 
-^ View (React)
-^ Dispatch an Action
-^ Reducers manipulate the state in Store
-^ Re-render -> View
-^ Talk about how we don't mutate and performance
+^ Keeping with the one-way flow of data, this is how we communicate in a Redux environment.
+^ This is basically the asterisk, this is how we can pass data upwards. 
+^ React, the UI, initiates an action, which is transformed by a reducer to create a new state in the store. The new store sends the new information to the top-level component for all the rest to re-render.
 
 ---
 
@@ -170,6 +191,10 @@ export function inputReducer(state, action) {
 }
 ```
 
+^ This is where we define what the new state will look like. That's what is happening in the INPUT_CHANGE case.
+^ It takes in the state/store and an action.
+^ Again, we're not mutating.
+
 ---
 
 # State Management
@@ -187,6 +212,8 @@ export function handleChange(event) {
 }
 ```
 
+^ An action is just a plain JS object with a special type key. This key is important because it's how we match it up with the correct reducer.
+
 ---
 
 # State Management
@@ -202,6 +229,10 @@ function Input(props) {
   )
 }
 
+function mapStateToProps(state) {
+  return { input } = state;
+}
+
 function mapDispatchToProps(dispatch) {
   return({
     handleOnChange: (event) => {
@@ -210,8 +241,10 @@ function mapDispatchToProps(dispatch) {
   })
 }
 
-export default connect(mapStateToProps)(Input)
+export default connect(mapStateToProps, mapDispatchToProps)(Input)
 ```
+
+^ Altogether now, you have a component, Input. It calls a function when you change the input. That function dispatches an action to the reducers/store. The store is updated. Input listens to the store, and gets the updated values in the form of props.
 
 ---
 
@@ -264,6 +297,9 @@ function mapDispatchToProps(dispatch) {
 }
 ```
 
+^ This time we're importing an action from another component to get something to happen.
+^ Uh oh! Now these two unrelated components are coupled together.
+
 ---
 
 # State Management
@@ -285,6 +321,10 @@ function* someSagaName() {
 }
 ```
 
+^ Without getting too far into it, Sagas are these generator functions that pause on yields inside of them.
+^ There's a Saga middleware that sits in the middle of the redux action/reducer flow that can listen for specific actions.
+^ We've reduced coupling between the two components, because now all that our original one has to do is emit the same plain action that it always would have. It has no knowledge of how OtherComponent works.
+
 ---
 
 # State Management
@@ -304,9 +344,14 @@ src/
 |__ index.js
 ```
 
+^ This is something I need to learn more about. Where do the 'glue' sagas live? Right now, the best place I have for them is outside of the components/ directory.
+^ React/Redux is a constant state of not knowing what to do.
+
 ---
 
 # Next Steps
+
+^ These are some ideas that I wanted to touch on to either explain some more advanced techniques or introduce what is possible at the extremes.
 
 ---
 
@@ -324,6 +369,8 @@ function MyUniqueTable(props) {
 }
 ```
 
+^ Instead of inheritance with OOP, we have composition with functional programming. 
+^ We should focus initially on building generic components that we can easily specialize to create full experiences.
 ^ https://reactjs.org/docs/composition-vs-inheritance.html
 
 ---
@@ -345,6 +392,10 @@ function* inputSaga() {
   }
 }
 ```
+
+^ Here's a quick example (with some pseudo code) to illustrate how to do async requests with Sagas.
+^ This example exists with the rest of the Input component because it is specific to that component.
+^ Now this is cool, but this can easily breakdown when you have multiple components all initiating their own fetches.
 
 ---
 
