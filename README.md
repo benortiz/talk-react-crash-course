@@ -27,3 +27,5 @@ npm start
 1. Create a component to render the response from [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 1. Setup actions and reducers to request the response and store the response in the store.
 1. Handle success and errors by using Sagas.
+
+## Resources/Citations
