@@ -1,13 +1,14 @@
 {
-  "name": "simple_webpack_boilerplate",
+  "name": "react-crash-course-example",
   "version": "1.0.0",
-  "description": "A ready to use simple webpack boilerplate",
+  "description": "An sandbox environment to use React, Redux, and Sagas",
   "main": "src/index.js",
+  "repository": "https://github.com/benortiz/talk-react-crash-course",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
-  "author": "pinglinh",
+  "author": "benortiz",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
