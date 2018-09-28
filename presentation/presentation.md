@@ -126,13 +126,12 @@ function MyForm(props) {
 # State Management
 ## Data Flow
 
-![inline](https://cdn-images-1.medium.com/max/1600/1*EdiFUfbTNmk_IxFDNqokqg.png)
+![inline](./redux-data-flow.png)
 
-1. View (React)
-1. Dispatch an Action
-1. Reducers manipulate the state in Store
-1. Re-render -> View
-
+^ View (React)
+^ Dispatch an Action
+^ Reducers manipulate the state in Store
+^ Re-render -> View
 ^ Talk about how we don't mutate and performance
 
 ---
