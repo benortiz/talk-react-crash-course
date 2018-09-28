@@ -5,7 +5,8 @@
 1. Thinking in React
 1. React
 1. State Management
-1. Async Actions
+1. Next Steps
+1. Try it Yourself
 
 ---
 
@@ -140,7 +141,7 @@ function MyForm(props) {
 ## Data Flow
 
 ```javascript
-import { inputReducer } from 'components/Form/Input'
+import { inputReducer } from 'components/Form'
 
 const store = createStore({
   input: inputReducer,  
@@ -305,20 +306,56 @@ src/
 
 ---
 
-# Async Actions
-
-^ sagas and remote, doing fetch, success/fail
-
----
-
-# Async Actions
-## Data Flow
+# Next Steps
 
 ---
 
 # Next Steps
+## Async Actions
 
-- GraphQL & Apolo
+```javascript
+// Input.sagas.js
+function* inputSaga() {
+  while (true) {
+    const payload = yield take('INPUT_CHANGE');
+    const response = yield fetch('/some/api/endpoing', {value: payload.value});
+    if (response.ok?) {
+      put({type: 'REQUEST_SUCCESS', newValue: response.value});
+    } else {
+      put({type: 'REQUEST_FAILED', error: response.error});
+    }
+  }
+}
+```
 
-^ Components can declare what data they want. GraphQL will handle the fetching. Apolo will make sure it only fetches data that we don't alreay have locally.
-^ Apolo query batching
+---
+
+# Next Steps
+## GraphQL & Apollo
+
+```javascript
+@graphql(
+  query ExampleQuery {
+  user {
+    firstName
+    lastName
+  }
+})
+class ExampleContainer extends Component {
+  render() {
+    const { data: { loading, user } } = this.props;
+
+    if (loading && !user) {
+      return <NoDataComponent />;
+    }
+
+    return <Example {...user} />;
+  }
+}
+
+export default ExampleContainer;
+```
+
+^ Components can declare what data they want. GraphQL will handle the fetching. Apollo will make sure it only fetches data that we don't alreay have locally.
+^ Apollo query batching
+^ https://blog.apollographql.com/reducing-our-redux-code-with-react-apollo-5091b9de9c2a
