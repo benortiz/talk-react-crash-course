@@ -2,11 +2,14 @@
 A (semi-)interactive presentation on React, Redux, and Sagas.
 
 ## Presentation
+_Expected duration: 1 hour_
+
 The goal of the presentation is to give you a mental framework to work with when
 developing a React application. It leaves out many of the specifics of the
 technology to focus on why you might choose to go one direction over another.
 
 ## Try it Yourself
+_Expected duration: 30 minutes_
 
 ### Install
 
