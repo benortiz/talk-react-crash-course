@@ -29,3 +29,8 @@ npm start
 1. Handle success and errors by using Sagas.
 
 ## Resources/Citations
+- [Pete Hunt: React: Rethinking best practices](https://www.youtube.com/watch?v=x7cQ3mrcKaY)
+- [Max Stoiber - Scaling React.js Applications](https://www.youtube.com/watch?v=52Vt8Fg3ZPY)
+- [React Documentation](https://reactjs.org/docs/)
+- [Redux Documentation](https://redux.js.org/basics)
+- [Reducing Our Redux Code with React Apollo](https://blog.apollographql.com/reducing-our-redux-code-with-react-apollo-5091b9de9c2a)
